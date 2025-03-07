@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相册安全警告</title>
+    <style>
+        body {
+            background-color: black;
+            color: lime;
+            font-family: monospace;
+            padding: 20px;
+        }
+        #log {
+            white-space: pre-line;
+            font-size: 14px;
+        }
+        .warning {
+            color: red;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 class="warning">⚠️ 警告！你的相册正在被远程访问！</h2>
+    <p id="log">正在扫描你的设备...</p>
+
+    <script>
+        const logs = [
+            "检测到未知设备访问你的相册...",
+            "远程设备 IP: 192.168.1.42",
+            "获取权限中...",
+            "访问成功，开始传输照片...",
+            "上传 IMG_2024_03_08.JPG",
+            "上传 IMG_2024_03_09.JPG",
+            "⚠️ 你的照片正在被黑客上传到暗网！",
+            "尝试阻止入侵...",
+            "❌ 失败！设备已被控制！"
+        ];
+
+        let index = 0;
+        function showLogs() {
+            if (index < logs.length) {
+                document.getElementById("log").innerHTML += `\n${logs[index]}`;
+                index++;
+                setTimeout(showLogs, 1500);
+            } else {
+                alert("你的相册已被黑客盗取！请尽快断网！");
+                if (navigator.vibrate) {
+                    navigator.vibrate([500, 300, 500]); // 震动模拟黑客攻击
+                }
+            }
+        }
+
+        setTimeout(showLogs, 1000);
+    </script>
+
+</body>
+</html>
